@@ -16,7 +16,7 @@ const focus = [
   {
     icon: FaCubes,
     title: 'Infrastructure as Code',
-    desc: 'Shipping modular, reusable Terraform and CloudFormation to make enterprise deployments repeatable and reviewable.',
+    desc: 'Shipping modular, reusable Terraform to make enterprise deployments repeatable and reviewable.',
   },
   {
     icon: FaShieldAlt,

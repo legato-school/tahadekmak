@@ -12,10 +12,10 @@ const experiences = [
       'Managing the full SDLC and enforcing turnaround SLAs, driving consistent on-time delivery at production-grade quality.',
       'Spearheading presales technical discovery for 10+ high-value startups.',
       'Accelerating AWS adoption by positioning services on the AWS Marketplace and securing Service Delivery Programs.',
-      'Streamlining enterprise deployments with modular Terraform and CloudFormation templates.',
+      'Streamlining enterprise deployments with modular, reusable Terraform templates.',
       'Securing client environments through Landing Zones, security hardening and automated cloud operations.',
     ],
-    tech: ['AWS', 'Terraform', 'CloudFormation', 'Landing Zones', 'DevSecOps'],
+    tech: ['AWS', 'Terraform', 'Landing Zones', 'DevSecOps'],
   },
   {
     title: 'DevSecOps Engineer',
