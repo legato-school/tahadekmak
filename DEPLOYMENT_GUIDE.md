@@ -17,34 +17,35 @@ Complete step-by-step guide to deploy your portfolio to AWS Amplify and configur
 
 ### Add Required Files to `/public` folder:
 
-1. **Profile Images**:
-   - Copy your photo to: `/public/profile.jpg` (800x1000px recommended)
-   - Copy about image to: `/public/profile-about.jpg` (800x800px recommended)
-   - Copy social image to: `/public/og-image.jpg` (1200x630px for social sharing)
+1. **Profile Image**:
+   - Copy your photo to: `/public/taha.jpeg` (recommended: 800x800px or higher)
+   - This will be used for both Hero and About sections
 
 2. **CV/Resume**:
-   - Add your CV as: `/public/Taha-Dekmak-CV.pdf`
+   - Add your CV as: `/public/TahaDekmak-SSA.pdf`
 
-3. **Favicon**:
+3. **Social Share Image (Optional)**:
+   - Copy social image to: `/public/og-image.jpg` (1200x630px for social sharing)
+
+4. **Favicon**:
    - Add favicon as: `/public/favicon.ico` (32x32px)
 
-**Quick command to copy your photo:**
+**Quick command to copy your files:**
 ```bash
 # Navigate to project
 cd /Users/tahadekmak/Documents/logixdev/7jezle/tahadekmak/public
 
 # Copy your images here
-cp ~/path-to-your-photo.jpg profile.jpg
-cp ~/path-to-your-photo.jpg profile-about.jpg
-cp ~/path-to-your-photo.jpg og-image.jpg
-cp ~/path-to-your-cv.pdf Taha-Dekmak-CV.pdf
+cp ~/path-to-your-photo.jpeg taha.jpeg
+cp ~/path-to-your-cv.pdf TahaDekmak-SSA.pdf
+cp ~/path-to-og-image.jpg og-image.jpg  # optional
 ```
 
 Then commit and push:
 ```bash
 cd /Users/tahadekmak/Documents/logixdev/7jezle/tahadekmak
 git add public/*
-git commit -m "Add profile images, CV, and favicon"
+git commit -m "Add profile image and CV"
 git push
 ```
 
@@ -305,9 +306,9 @@ colors: {
 **Solution**:
 1. Verify images exist in `/public` folder
 2. Check filenames match exactly:
-   - `profile.jpg`
-   - `profile-about.jpg`
-   - `og-image.jpg`
+   - `taha.jpeg` (profile photo)
+   - `TahaDekmak-SSA.pdf` (CV)
+   - `og-image.jpg` (optional social share image)
 3. Push to GitHub and redeploy
 
 ---

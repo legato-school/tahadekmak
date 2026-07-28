@@ -50,7 +50,7 @@ const Hero = () => {
               Get In Touch
             </a>
             <a
-              href="/Taha-Dekmak-CV.pdf"
+              href="/TahaDekmak-SSA.pdf"
               download
               className="btn-secondary"
             >
@@ -99,7 +99,7 @@ const Hero = () => {
             {/* Main image container */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="/profile.jpg"
+                src="/taha.jpeg"
                 alt="Taha Dekmak"
                 className="w-full h-auto object-cover"
               />

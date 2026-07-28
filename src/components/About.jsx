@@ -27,7 +27,7 @@ const About = () => {
             <div className="relative animate-fade-in">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src="/profile-about.jpg"
+                  src="/taha.jpeg"
                   alt="Taha Dekmak at work"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 />
