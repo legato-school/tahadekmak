@@ -4,7 +4,7 @@ import { SiTerraform, SiKubernetes } from 'react-icons/si';
 
 const About = () => {
   const stats = [
-    { value: '12+', label: 'AWS Certifications' },
+    { value: '17+', label: 'Certifications' },
     { value: '4+', label: 'Years Experience' },
     { value: '50+', label: 'Projects Delivered' },
   ];
@@ -47,6 +47,11 @@ const About = () => {
                 <p>
                   I'm a <span className="text-aws-orange font-semibold">Certified AWS Solutions Architect</span> with
                   a passion for designing secure, high-performance cloud architectures that drive business success.
+                </p>
+                <p>
+                  As an <span className="font-bold text-aws-orange">AWStronaut (12x AWS Certified Golden Jacket holder)</span> and{' '}
+                  <span className="font-bold text-blue-600">Kubestronaut (5x Kubernetes Certified)</span>, I bring
+                  deep expertise in cloud-native architectures and container orchestration.
                 </p>
                 <p>
                   Currently leading a cross-functional team of 8+ DevOps and AI Engineers at{' '}

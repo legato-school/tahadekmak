@@ -51,7 +51,7 @@ const Hero = () => {
             </a>
             <a
               href="/TahaDekmak-SSA.pdf"
-              download
+              download="TahaDekmak-SSA.pdf"
               className="btn-secondary"
             >
               <FaDownload />
@@ -105,12 +105,19 @@ const Hero = () => {
               />
               
               {/* AWS Badge Overlay */}
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg flex items-center gap-3">
-                  <FaAws className="text-3xl text-aws-orange" />
+              <div className="absolute bottom-4 left-4 right-4 space-y-2">
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg flex items-center gap-2">
+                  <FaAws className="text-2xl text-aws-orange" />
                   <div>
-                    <p className="text-sm font-bold text-aws-dark">12x AWS Certified</p>
-                    <p className="text-xs text-gray-600">Solutions Architect Professional</p>
+                    <p className="text-xs font-bold text-aws-dark">AWStronaut (12x AWS)</p>
+                    <p className="text-[10px] text-gray-600">Golden Jacket Holder</p>
+                  </div>
+                </div>
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg flex items-center gap-2">
+                  <SiKubernetes className="text-2xl text-blue-600" />
+                  <div>
+                    <p className="text-xs font-bold text-aws-dark">Kubestronaut (5x K8s)</p>
+                    <p className="text-[10px] text-gray-600">CNCF Certified</p>
                   </div>
                 </div>
               </div>
