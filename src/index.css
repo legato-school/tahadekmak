@@ -112,6 +112,66 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Blog post content (Ghost HTML) */
+  .prose-blog {
+    @apply text-text-secondary leading-relaxed text-[1.05rem];
+  }
+  .prose-blog > * + * {
+    @apply mt-6;
+  }
+  .prose-blog h2 {
+    @apply font-display text-2xl sm:text-3xl font-bold text-text-primary tracking-tight mt-12 mb-4;
+  }
+  .prose-blog h3 {
+    @apply font-display text-xl font-bold text-text-primary mt-10 mb-3;
+  }
+  .prose-blog h4 {
+    @apply font-semibold text-text-primary mt-8 mb-2;
+  }
+  .prose-blog p {
+    @apply leading-relaxed;
+  }
+  .prose-blog a {
+    @apply text-accent font-medium underline underline-offset-2 hover:text-accent-dark;
+  }
+  .prose-blog strong {
+    @apply text-text-primary font-semibold;
+  }
+  .prose-blog ul {
+    @apply list-disc pl-6 space-y-2;
+  }
+  .prose-blog ol {
+    @apply list-decimal pl-6 space-y-2;
+  }
+  .prose-blog blockquote {
+    @apply border-l-4 border-accent pl-5 italic text-text-muted my-6;
+  }
+  .prose-blog img {
+    @apply rounded-lg border border-border mx-auto my-8;
+  }
+  .prose-blog figure {
+    @apply my-8;
+  }
+  .prose-blog figcaption {
+    @apply text-center text-text-muted text-sm font-mono mt-3;
+  }
+  .prose-blog code {
+    @apply font-mono text-sm bg-bg-tertiary text-accent-dark rounded px-1.5 py-0.5;
+  }
+  .prose-blog pre {
+    @apply bg-aws-dark text-white rounded-lg p-5 overflow-x-auto my-6 text-sm;
+  }
+  .prose-blog pre code {
+    @apply bg-transparent text-white p-0;
+  }
+  .prose-blog hr {
+    @apply border-border my-10;
+  }
+  .prose-blog h2:first-child,
+  .prose-blog h3:first-child {
+    @apply mt-0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

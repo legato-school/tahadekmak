@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Expertise', href: '#skills' },
-  { name: 'Blogs', href: 'https://blogs.tahadekmak.com' },
-  { name: 'Contact', href: '#contact' },
+const sectionLinks = [
+  { name: 'About', id: 'about' },
+  { name: 'Experience', id: 'experience' },
+  { name: 'Certifications', id: 'certifications' },
+  { name: 'Expertise', id: 'skills' },
 ];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('home');
+  const { pathname } = useLocation();
+  const onHome = pathname === '/';
 
   useEffect(() => {
     const sections = ['home', 'about', 'experience', 'certifications', 'skills', 'contact'];
@@ -29,31 +30,32 @@ const Header = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [pathname]);
+
+  const closeMenu = () => setOpen(false);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || !onHome
           ? 'bg-bg-primary/85 backdrop-blur-md border-b border-border'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="container-wide section-padding">
         <nav className="flex items-center justify-between h-16" aria-label="Main">
-          <a href="#home" className="group flex items-baseline gap-1 font-display font-bold text-lg tracking-tight">
+          <Link to="/" className="group flex items-baseline gap-1 font-display font-bold text-lg tracking-tight">
             <span className="text-text-primary">Taha Dekmak</span>
             <span className="text-accent transition-transform group-hover:translate-y-[-2px]">/</span>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => {
-              const id = link.href.replace('#', '');
-              const isActive = link.href.startsWith('#') && active === id;
+            {sectionLinks.map((link) => {
+              const isActive = onHome && active === link.id;
               return (
                 <a
                   key={link.name}
-                  href={link.href}
+                  href={`/#${link.id}`}
                   className={`relative px-3 py-2 text-sm font-medium transition-colors ${
                     isActive ? 'text-text-primary' : 'text-text-muted hover:text-text-primary'
                   }`}
@@ -65,6 +67,20 @@ const Header = () => {
                 </a>
               );
             })}
+            <Link
+              to="/blogs"
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                pathname.startsWith('/blogs') ? 'text-text-primary' : 'text-text-muted hover:text-text-primary'
+              }`}
+            >
+              Blogs
+            </Link>
+            <a
+              href="/#contact"
+              className="px-3 py-2 text-sm font-medium text-text-muted hover:text-text-primary transition-colors"
+            >
+              Contact
+            </a>
           </div>
 
           <button
@@ -89,16 +105,30 @@ const Header = () => {
         }`}
       >
         <div className="container-wide section-padding py-3 bg-bg-primary/95 backdrop-blur-md">
-          {navLinks.map((link) => (
+          {sectionLinks.map((link) => (
             <a
               key={link.name}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="block px-2 py-3 text-sm font-medium text-text-muted hover:text-accent transition-colors border-b border-border/60 last:border-0"
+              href={`/#${link.id}`}
+              onClick={closeMenu}
+              className="block px-2 py-3 text-sm font-medium text-text-muted hover:text-accent transition-colors border-b border-border/60"
             >
               {link.name}
             </a>
           ))}
+          <Link
+            to="/blogs"
+            onClick={closeMenu}
+            className="block px-2 py-3 text-sm font-medium text-text-muted hover:text-accent transition-colors border-b border-border/60"
+          >
+            Blogs
+          </Link>
+          <a
+            href="/#contact"
+            onClick={closeMenu}
+            className="block px-2 py-3 text-sm font-medium text-text-muted hover:text-accent transition-colors"
+          >
+            Contact
+          </a>
         </div>
       </div>
     </header>

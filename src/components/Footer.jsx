@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const socials = [
@@ -40,9 +41,9 @@ const Footer = () => {
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <p className="text-text-muted text-sm">© {new Date().getFullYear()} Taha Dekmak. All rights reserved.</p>
           <div className="flex items-center gap-4 text-sm">
-            <a href="#about" className="text-text-muted hover:text-accent transition-colors">About</a>
-            <a href="#experience" className="text-text-muted hover:text-accent transition-colors">Experience</a>
-            <a href="https://blogs.tahadekmak.com" className="text-text-muted hover:text-accent transition-colors">Blogs</a>
+            <a href="/#about" className="text-text-muted hover:text-accent transition-colors">About</a>
+            <a href="/#experience" className="text-text-muted hover:text-accent transition-colors">Experience</a>
+            <Link to="/blogs" className="text-text-muted hover:text-accent transition-colors">Blogs</Link>
           </div>
         </div>
       </div>

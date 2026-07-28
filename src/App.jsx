@@ -1,24 +1,22 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Certifications from './components/Certifications';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import BlogList from './pages/BlogList';
+import BlogPost from './pages/BlogPost';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="min-h-screen">
-        <Hero />
-        <About />
-        <Experience />
-        <Certifications />
-        <Skills />
-        <Contact />
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<BlogList />} />
+          <Route path="/blogs/:slug" element={<BlogPost />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
       </main>
       <Footer />
     </div>
