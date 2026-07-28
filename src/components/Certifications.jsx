@@ -1,138 +1,139 @@
 import React from 'react';
-import { FaAws, FaCertificate, FaCheckCircle } from 'react-icons/fa';
+import { FaAws, FaTrophy } from 'react-icons/fa';
 import { SiKubernetes, SiTerraform } from 'react-icons/si';
+import useReveal from '../hooks/useReveal';
+
+const tierColor = {
+  Professional: 'text-amber-700',
+  Associate: 'text-blue-700',
+  Specialty: 'text-purple-700',
+  Foundational: 'text-emerald-700',
+  Kubernetes: 'text-[#326CE5]',
+  HashiCorp: 'text-[#7B42BC]',
+};
+
+const summary = [
+  { count: 2, label: 'Foundational', color: 'text-emerald-700' },
+  { count: 5, label: 'Associate', color: 'text-blue-700' },
+  { count: 2, label: 'Professional', color: 'text-amber-700' },
+  { count: 3, label: 'Specialty', color: 'text-purple-700' },
+  { count: 5, label: 'Kubernetes', color: 'text-[#326CE5]' },
+];
+
+const credentials = [
+  // AWS Foundational
+  { tier: 'Foundational', name: 'Cloud Practitioner', code: 'CLF-C02', icon: 'aws', date: '2021' },
+  { tier: 'Foundational', name: 'AI Practitioner', code: 'AIF-C01', icon: 'aws', date: '2024' },
+  // AWS Associate
+  { tier: 'Associate', name: 'Solutions Architect Associate', code: 'SAA-C03', icon: 'aws', date: '2021' },
+  { tier: 'Associate', name: 'Developer Associate', code: 'DVA-C02', icon: 'aws', date: '2022' },
+  { tier: 'Associate', name: 'SysOps Administrator Associate', code: 'SOA-C02', icon: 'aws', date: '2022' },
+  { tier: 'Associate', name: 'Data Engineer Associate', code: 'DEA-C01', icon: 'aws', date: '2024' },
+  { tier: 'Associate', name: 'Machine Learning Associate', code: 'MLA-C01', icon: 'aws', date: '2024' },
+  // AWS Professional
+  { tier: 'Professional', name: 'Solutions Architect Professional', code: 'SAP-C02', icon: 'aws', date: '2023' },
+  { tier: 'Professional', name: 'DevOps Engineer Professional', code: 'DOP-C02', icon: 'aws', date: '2023' },
+  // AWS Specialty
+  { tier: 'Specialty', name: 'Advanced Networking Specialty', code: 'ANS-C01', icon: 'aws', date: '2023' },
+  { tier: 'Specialty', name: 'Machine Learning Specialty', code: 'MLS-C01', icon: 'aws', date: '2024' },
+  { tier: 'Specialty', name: 'Security Specialty', code: 'SCS-C02', icon: 'aws', date: '2024' },
+  // Kubernetes (Kubestronaut)
+  { tier: 'Kubernetes', name: 'Certified Kubernetes Administrator', code: 'CKA', icon: 'k8s', date: '2025' },
+  { tier: 'Kubernetes', name: 'Kubernetes Application Developer', code: 'CKAD', icon: 'k8s', date: '2025' },
+  { tier: 'Kubernetes', name: 'Kubernetes Security Specialist', code: 'CKS', icon: 'k8s', date: '2025' },
+  { tier: 'Kubernetes', name: 'Kubernetes & Cloud Native Associate', code: 'KCNA', icon: 'k8s', date: '2025' },
+  { tier: 'Kubernetes', name: 'Cloud Native Security Associate', code: 'KCSA', icon: 'k8s', date: '2026' },
+  // HashiCorp
+  { tier: 'HashiCorp', name: 'Terraform Certified Associate', code: '003', icon: 'terraform', date: '2023' },
+];
+
+const CredIcon = ({ type }) => {
+  if (type === 'k8s') return <SiKubernetes className="w-6 h-6 text-[#326CE5]" />;
+  if (type === 'terraform') return <SiTerraform className="w-6 h-6 text-[#7B42BC]" />;
+  return <FaAws className="w-6 h-6 text-accent" />;
+};
 
 const Certifications = () => {
-  const certifications = [
-    {
-      name: 'AWS Golden Jacket (12x Certified)',
-      issuer: 'Amazon Web Services',
-      year: '2025',
-      icon: FaAws,
-      color: 'from-aws-orange to-yellow-500',
-      featured: true,
-    },
-    {
-      name: 'Kubestronaut (5x Kubernetes Certified)',
-      issuer: 'CNCF',
-      year: '2026',
-      icon: SiKubernetes,
-      color: 'from-blue-500 to-blue-700',
-      featured: true,
-    },
-    {
-      name: 'HashiCorp Terraform Certified Associate',
-      issuer: 'HashiCorp',
-      year: '2024',
-      icon: SiTerraform,
-      color: 'from-purple-500 to-purple-700',
-      featured: false,
-    },
-  ];
-
-  const awsCertifications = [
-    'Solutions Architect - Professional',
-    'DevOps Engineer - Professional',
-    'Solutions Architect - Associate',
-    'Developer - Associate',
-    'SysOps Administrator - Associate',
-    'Security - Specialty',
-    'Advanced Networking - Specialty',
-    'Database - Specialty',
-    'Data Analytics - Specialty',
-    'Machine Learning - Specialty',
-    'SAP on AWS - Specialty',
-    'Cloud Practitioner',
-  ];
+  const [ref, visible] = useReveal();
 
   return (
-    <section id="certifications" className="py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-12 animate-slide-up">
-            <h2 className="section-title">Certifications</h2>
-            <p className="text-gray-600 text-lg">
-              Professional certifications demonstrating expertise
-            </p>
-          </div>
+    <section
+      id="certifications"
+      ref={ref}
+      className={`section-band-alt reveal ${visible ? 'reveal-visible' : ''}`}
+    >
+      <div className="container-max section-padding">
+        <header className="section-head">
+          <p className="section-eyebrow">03 · Certifications</p>
+          <h2 className="section-title">Certified, end to end</h2>
+          <p className="section-lead">
+            Validated depth across the full AWS stack and the cloud-native ecosystem, spanning
+            18 active certifications and counting.
+          </p>
+        </header>
 
-          {/* Featured Certifications */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {certifications.map((cert, index) => (
-              <div
-                key={cert.name}
-                className={`card hover:border-aws-orange transform hover:-translate-y-2 ${
-                  cert.featured ? 'md:col-span-1' : ''
-                } animate-slide-up`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="text-center">
-                  {/* Icon */}
-                  <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br ${cert.color} flex items-center justify-center text-white shadow-lg`}>
-                    <cert.icon className="text-4xl" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-aws-dark mb-2">{cert.name}</h3>
-                  <p className="text-sm text-gray-600 mb-1">{cert.issuer}</p>
-                  <p className="text-xs text-gray-500">{cert.year}</p>
-
-                  {cert.featured && (
-                    <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-aws-orange/10 text-aws-orange rounded-full text-xs font-medium">
-                      <FaCheckCircle />
-                      Featured
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* AWS Certifications List */}
-          <div className="bg-gradient-to-br from-aws-orange/5 to-aws-blue/5 rounded-2xl p-8 border border-gray-200 animate-fade-in">
-            <div className="flex items-center gap-3 mb-6">
-              <FaAws className="text-4xl text-aws-orange" />
-              <div>
-                <h3 className="text-2xl font-bold text-aws-dark">AWS Certifications</h3>
-                <p className="text-gray-600 text-sm">Complete collection of 12 AWS certifications</p>
-              </div>
+        {/* Summary strip */}
+        <dl className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-8">
+          {summary.map((s) => (
+            <div key={s.label} className="rounded-lg border border-border bg-bg-primary px-5 py-4">
+              <dt className={`text-2xl font-bold tabular-nums ${s.color}`}>{s.count}</dt>
+              <dd className="text-text-muted text-xs mt-0.5 font-mono">{s.label}</dd>
             </div>
+          ))}
+        </dl>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {awsCertifications.map((cert, index) => (
-                <div
-                  key={cert}
-                  className="flex items-start gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow animate-slide-up"
-                  style={{ animationDelay: `${0.05 * index}s` }}
-                >
-                  <FaCertificate className="text-aws-orange text-xl mt-1 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 font-medium">{cert}</span>
-                </div>
-              ))}
+        {/* Elite achievement tiles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="rounded-lg border border-accent/40 bg-gradient-to-br from-accent/[0.07] to-transparent p-6 flex items-start gap-4">
+            <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-accent/10 flex items-center justify-center">
+              <FaAws className="w-7 h-7 text-accent" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <FaTrophy className="w-3.5 h-3.5 text-accent" />
+                <p className="text-xs font-mono uppercase tracking-wider text-accent">AWStronaut</p>
+              </div>
+              <h3 className="text-lg font-bold text-text-primary mt-1">AWS Golden Jacket · 12x Certified</h3>
+              <p className="text-text-secondary text-sm mt-1 leading-relaxed">
+                Holder of every active AWS certification across Foundational, Associate, Professional and Specialty.
+              </p>
             </div>
           </div>
 
-          {/* Education Section */}
-          <div className="mt-16 grid md:grid-cols-1 gap-8">
-            <div className="card animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <h3 className="text-2xl font-bold text-aws-dark mb-4 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-aws-blue/10 flex items-center justify-center">
-                  <FaCertificate className="text-aws-blue text-xl" />
-                </div>
-                Education
-              </h3>
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-lg font-semibold text-aws-dark">
-                    Bachelor in Computer and Communication Engineering
-                  </h4>
-                  <p className="text-aws-orange font-medium">Islamic University of Lebanon</p>
-                  <p className="text-gray-600 text-sm">2015-2020</p>
-                </div>
+          <div className="rounded-lg border border-[#326CE5]/40 bg-gradient-to-br from-[#326CE5]/[0.07] to-transparent p-6 flex items-start gap-4">
+            <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-[#326CE5]/10 flex items-center justify-center">
+              <SiKubernetes className="w-7 h-7 text-[#326CE5]" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <FaTrophy className="w-3.5 h-3.5 text-[#326CE5]" />
+                <p className="text-xs font-mono uppercase tracking-wider text-[#326CE5]">Kubestronaut</p>
               </div>
+              <h3 className="text-lg font-bold text-text-primary mt-1">CNCF · 5x Kubernetes Certified</h3>
+              <p className="text-text-secondary text-sm mt-1 leading-relaxed">
+                CKA, CKAD, CKS, KCNA and KCSA, the complete CNCF Kubernetes certification set.
+              </p>
             </div>
           </div>
+        </div>
+
+        {/* Credential grid */}
+        <div className="border-t border-l border-border rounded-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-bg-primary">
+          {credentials.map((c) => (
+            <div key={c.code + c.name} className="credential-cell flex gap-3 min-w-0">
+              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center mt-0.5">
+                <CredIcon type={c.icon} />
+              </div>
+              <div className="min-w-0">
+                <p className={`text-xs font-mono font-medium mb-1 ${tierColor[c.tier]}`}>{c.tier}</p>
+                <h3 className="text-sm font-semibold text-text-primary leading-snug mb-0.5">{c.name}</h3>
+                <p className="text-text-muted text-xs font-mono">
+                  {c.code}
+                  <span className="text-text-muted/60"> · {c.date}</span>
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

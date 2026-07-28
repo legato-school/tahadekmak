@@ -1,6 +1,6 @@
-# Redirect /blogs to Ghost CMS instance
-/blogs/* http://52.49.181.64/blogs/:splat 200
-/blogs http://52.49.181.64/blogs 200
+# Redirect /blogs to the Ghost blog subdomain
+/blogs/*  https://blogs.tahadekmak.com/:splat  301!
+/blogs    https://blogs.tahadekmak.com         301!
 
 # SPA fallback
 /*    /index.html   200

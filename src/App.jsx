@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,16 +9,10 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
   return (
-    <div className={`min-h-screen transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <div className="min-h-screen">
       <Header />
-      <main>
+      <main className="min-h-screen">
         <Hero />
         <About />
         <Experience />

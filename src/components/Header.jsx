@@ -1,87 +1,105 @@
 import React, { useState, useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+
+const navLinks = [
+  { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Certifications', href: '#certifications' },
+  { name: 'Expertise', href: '#skills' },
+  { name: 'Blogs', href: 'https://blogs.tahadekmak.com' },
+  { name: 'Contact', href: '#contact' },
+];
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const sections = ['home', 'about', 'experience', 'certifications', 'skills', 'contact'];
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      const y = window.scrollY + 130;
+      let current = 'home';
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= y) current = id;
+      }
+      setActive(current);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Blogs', href: '/blogs' },
-    { name: 'Contact', href: '#contact' },
-  ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg py-4'
-          : 'bg-transparent py-6'
+        scrolled
+          ? 'bg-bg-primary/85 backdrop-blur-md border-b border-border'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6">
-        <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#home"
-            className="text-2xl font-bold bg-gradient-to-r from-aws-orange to-aws-blue bg-clip-text text-transparent"
-          >
-            TD
+      <div className="container-wide section-padding">
+        <nav className="flex items-center justify-between h-16" aria-label="Main">
+          <a href="#home" className="group flex items-baseline gap-1 font-display font-bold text-lg tracking-tight">
+            <span className="text-text-primary">Taha Dekmak</span>
+            <span className="text-accent transition-transform group-hover:translate-y-[-2px]">/</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <li key={link.name}>
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const id = link.href.replace('#', '');
+              const isActive = link.href.startsWith('#') && active === id;
+              return (
                 <a
+                  key={link.name}
                   href={link.href}
-                  className="text-gray-700 hover:text-aws-orange transition-colors duration-300 font-medium"
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive ? 'text-text-primary' : 'text-text-muted hover:text-text-primary'
+                  }`}
                 >
                   {link.name}
+                  {isActive && (
+                    <span className="absolute left-3 right-3 -bottom-0.5 h-0.5 bg-accent rounded-full" />
+                  )}
                 </a>
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-2xl text-aws-dark"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 -mr-2 text-text-secondary hover:text-text-primary"
             aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
           >
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+            <div className="w-5 h-3.5 flex flex-col justify-between">
+              <span className={`block h-0.5 bg-current transition-all ${open ? 'translate-y-[6px] rotate-45' : ''}`} />
+              <span className={`block h-0.5 bg-current transition-all ${open ? 'opacity-0' : ''}`} />
+              <span className={`block h-0.5 bg-current transition-all ${open ? '-translate-y-[6px] -rotate-45' : ''}`} />
+            </div>
           </button>
         </nav>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 bg-white rounded-lg shadow-lg animate-slide-up">
-            <ul className="space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="block px-4 py-2 text-gray-700 hover:bg-aws-orange/10 hover:text-aws-orange transition-colors duration-300 rounded"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 border-b border-border ${
+          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 border-transparent'
+        }`}
+      >
+        <div className="container-wide section-padding py-3 bg-bg-primary/95 backdrop-blur-md">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="block px-2 py-3 text-sm font-medium text-text-muted hover:text-accent transition-colors border-b border-border/60 last:border-0"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
       </div>
     </header>
   );

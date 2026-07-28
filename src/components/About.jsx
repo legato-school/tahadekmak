@@ -1,112 +1,87 @@
 import React from 'react';
-import { FaAws, FaDocker, FaGithub } from 'react-icons/fa';
-import { SiTerraform, SiKubernetes } from 'react-icons/si';
+import useReveal from '../hooks/useReveal';
+
+const skillGroups = [
+  { label: 'Cloud & AWS', items: ['AWS', 'Landing Zones', 'Control Tower', 'Organizations', 'Well-Architected'] },
+  { label: 'IaC & DevOps', items: ['Terraform', 'SAM', 'GitHub Actions', 'Docker'] },
+  { label: 'Containers & K8s', items: ['Kubernetes', 'EKS', 'Karpenter', 'Helm', 'ArgoCD'] },
+  { label: 'Observability & Sec', items: ['Grafana', 'Prometheus', 'DevSecOps', 'Trivy', 'Tetragon'] },
+];
 
 const About = () => {
-  const stats = [
-    { value: '17+', label: 'Certifications' },
-    { value: '4+', label: 'Years Experience' },
-    { value: '50+', label: 'Projects Delivered' },
-  ];
+  const [ref, visible] = useReveal();
 
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-12 animate-slide-up">
-            <h2 className="section-title">About Me</h2>
-            <p className="text-gray-600 text-lg">
-              Transforming cloud infrastructure with AWS expertise
-            </p>
-          </div>
+    <section
+      id="about"
+      ref={ref}
+      className={`section-band-alt reveal ${visible ? 'reveal-visible' : ''}`}
+    >
+      <div className="container-max section-padding">
+        <header className="section-head">
+          <p className="section-eyebrow">01 · About</p>
+          <h2 className="section-title">The engineer behind the certs</h2>
+        </header>
 
-          {/* Main Content */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left: Profile Image */}
-            <div className="relative animate-fade-in">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img
-                  src="/taha.jpeg"
-                  alt="Taha Dekmak at work"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
-              {/* Floating icons */}
-              <div className="absolute -top-4 -right-4 bg-aws-orange text-white p-4 rounded-full shadow-lg animate-float">
-                <FaAws className="text-3xl" />
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-aws-blue text-white p-4 rounded-full shadow-lg animate-float" style={{ animationDelay: '1s' }}>
-                <SiTerraform className="text-3xl" />
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Journey */}
+          <div className="lg:col-span-7">
+            <h3 className="text-xl font-semibold text-text-primary mb-4">My Journey</h3>
+            <div className="space-y-4 text-text-secondary leading-relaxed text-[1.05rem]">
+              <p>
+                I earned my BSc in Computer and Communication Engineering from the Islamic University
+                of Lebanon, where my fascination with how systems work under the hood took root.
+              </p>
+              <p>
+                Over the past few years I've grown from full-stack development and production support
+                into DevSecOps and cloud architecture. Today I lead a cross-functional team of DevOps
+                and AI engineers at Digico Solutions, delivering end-to-end AWS solutions for startups
+                and SMBs across the region.
+              </p>
+              <p>
+                What sets me apart is a relentless curiosity paired with breadth: I hold the full{' '}
+                <span className="text-accent font-medium">AWS Golden Jacket (12x certified)</span> and am a{' '}
+                <span className="text-accent font-medium">Kubestronaut (5x Kubernetes certified)</span>, proof
+                of a commitment to going deep across cloud and cloud-native ecosystems.
+              </p>
             </div>
 
-            {/* Right: Content */}
-            <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  I'm a <span className="text-aws-orange font-semibold">Certified AWS Solutions Architect</span> with
-                  a passion for designing secure, high-performance cloud architectures that drive business success.
-                </p>
-                <p>
-                  As an <span className="font-bold text-aws-orange">AWStronaut (12x AWS Certified Golden Jacket holder)</span> and{' '}
-                  <span className="font-bold text-blue-600">Kubestronaut (5x Kubernetes Certified)</span>, I bring
-                  deep expertise in cloud-native architectures and container orchestration.
-                </p>
-                <p>
-                  Currently leading a cross-functional team of 8+ DevOps and AI Engineers at{' '}
-                  <span className="font-semibold text-aws-dark">Digico Solutions</span>, delivering 5+ end-to-end
-                  solutions for startups and SMBs while managing the full SDLC and enforcing best practices.
-                </p>
-                <p>
-                  My expertise spans <span className="font-semibold">AWS cloud architecture</span>,{' '}
-                  <span className="font-semibold">DevSecOps automation</span>,{' '}
-                  <span className="font-semibold">Infrastructure as Code (Terraform)</span>, and{' '}
-                  <span className="font-semibold">CI/CD pipelines</span>. I've successfully accelerated AWS cloud
-                  adoption by positioning services on the AWS Marketplace and securing Service Delivery Programs.
-                </p>
-                <p className="text-aws-blue font-medium">
-                  I thrive on exploring new technologies and understanding how systems work at a fundamental level.
-                </p>
-              </div>
-
-              {/* Tech Icons */}
-              <div className="flex gap-4 pt-4">
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-orange/10 text-aws-orange hover:bg-aws-orange hover:text-white transition-all duration-300">
-                  <FaAws className="text-2xl" />
-                </div>
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-blue/10 text-aws-blue hover:bg-aws-blue hover:text-white transition-all duration-300">
-                  <SiTerraform className="text-2xl" />
-                </div>
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-dark/10 text-aws-dark hover:bg-aws-dark hover:text-white transition-all duration-300">
-                  <FaDocker className="text-2xl" />
-                </div>
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-blue/10 text-aws-blue hover:bg-aws-blue hover:text-white transition-all duration-300">
-                  <SiKubernetes className="text-2xl" />
-                </div>
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-dark/10 text-aws-dark hover:bg-aws-dark hover:text-white transition-all duration-300">
-                  <FaGithub className="text-2xl" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-12 border-t border-gray-200">
-            {stats.map((stat, index) => (
-              <div
-                key={stat.label}
-                className="text-center animate-slide-up"
-                style={{ animationDelay: `${0.1 * (index + 1)}s` }}
+            <div className="mt-10 pt-8 border-t border-border">
+              <h3 className="text-xl font-semibold text-text-primary mb-4">Education</h3>
+              <h4 className="font-semibold text-text-primary">
+                BSc in Computer &amp; Communication Engineering
+              </h4>
+              <a
+                href="https://www.iul.edu.lb/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:underline text-sm font-medium"
               >
-                <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-aws-orange to-aws-blue bg-clip-text text-transparent">
-                  {stat.value}
-                </p>
-                <p className="text-sm md:text-base text-gray-600 mt-2 font-medium">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+                Islamic University of Lebanon
+              </a>
+              <p className="text-text-muted text-sm mt-1">Software &amp; Hardware Engineering · 2015–2020</p>
+            </div>
+          </div>
+
+          {/* Skills */}
+          <div className="lg:col-span-5">
+            <h3 className="text-xl font-semibold text-text-primary mb-5">Skills &amp; Technologies</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {skillGroups.map((group) => (
+                <div key={group.label}>
+                  <p className="text-xs font-mono uppercase tracking-wider text-accent mb-2">
+                    {group.label}
+                  </p>
+                  <ul className="space-y-1">
+                    {group.items.map((item) => (
+                      <li key={item} className="skill-tag list-none">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

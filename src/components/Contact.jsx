@@ -1,156 +1,78 @@
 import React from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin } from 'react-icons/fa';
+import useReveal from '../hooks/useReveal';
+
+const EMAIL = 'tahadekmak14@gmail.com';
+const LINKEDIN = 'https://www.linkedin.com/in/taha-dekmak/';
+// Opens Gmail compose in a new tab (reliable even when no default mail app is set)
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: FaEnvelope,
-      label: 'Email',
-      value: 'tahadekmakl4@gmail.com',
-      href: 'mailto:tahadekmakl4@gmail.com',
-    },
-    {
-      icon: FaPhone,
-      label: 'Phone',
-      value: '+961 70 356 025',
-      href: 'tel:+96170356025',
-    },
-    {
-      icon: FaMapMarkerAlt,
-      label: 'Location',
-      value: 'Beirut, Lebanon',
-      href: null,
-    },
-    {
-      icon: FaLinkedin,
-      label: 'LinkedIn',
-      value: '/in/taha-dekmak',
-      href: 'https://www.linkedin.com/in/taha-dekmak/',
-    },
-  ];
+  const [ref, visible] = useReveal();
 
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-12 animate-slide-up">
-            <h2 className="section-title">Get In Touch</h2>
-            <p className="text-gray-600 text-lg">
-              Let's discuss your next cloud project
-            </p>
-          </div>
+    <section
+      id="contact"
+      ref={ref}
+      className={`section-band-alt reveal ${visible ? 'reveal-visible' : ''}`}
+    >
+      <div className="container-max section-padding">
+        <header className="section-head">
+          <p className="section-eyebrow">05 · Contact</p>
+          <h2 className="section-title">Let's Connect</h2>
+          <p className="section-lead">
+            Whether you need an AWS architect, want to discuss a cloud project, or just want to talk
+            infrastructure, I'd love to hear from you.
+          </p>
+        </header>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Left: Contact Info */}
-            <div className="space-y-6 animate-slide-up">
-              <div>
-                <h3 className="text-2xl font-bold text-aws-dark mb-4">Contact Information</h3>
-                <p className="text-gray-600 mb-6">
-                  I'm always open to discussing new opportunities, collaborations, or AWS cloud architecture projects. Feel free to reach out!
-                </p>
+        <div className="contact-band">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+            <div className="lg:col-span-7 space-y-6">
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight">Ready to Work Together?</h3>
+              <p className="text-white/75 leading-relaxed max-w-xl">
+                I'm always open to discussing new opportunities, cloud migrations, and DevSecOps
+                collaborations. Whether you're a startup adopting AWS or an enterprise hardening your
+                cloud, let's talk.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={GMAIL_COMPOSE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white text-text-primary font-medium py-3 px-6 rounded-lg hover:bg-bg-secondary transition-colors"
+                >
+                  <FaEnvelope className="w-4 h-4" />
+                  Send Email
+                </a>
+                <a
+                  href={LINKEDIN}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-white/30 text-white font-medium py-3 px-6 rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  <FaLinkedin className="w-4 h-4" />
+                  LinkedIn
+                </a>
               </div>
-
-              {/* Contact Items */}
-              <div className="space-y-4">
-                {contactInfo.map((item) => (
-                  <div key={item.label} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-aws-orange/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="text-xl text-aws-orange" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500 mb-1">{item.label}</p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          target={item.label === 'LinkedIn' ? '_blank' : undefined}
-                          rel={item.label === 'LinkedIn' ? 'noopener noreferrer' : undefined}
-                          className="text-aws-dark hover:text-aws-orange transition-colors font-medium"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="text-aws-dark font-medium">{item.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Social Links */}
-              <div className="pt-6">
-                <p className="text-sm text-gray-500 mb-4">Connect with me</p>
-                <div className="flex gap-4">
-                  <a
-                    href="https://www.linkedin.com/in/taha-dekmak/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-dark text-white hover:bg-aws-orange transition-all duration-300 hover:scale-110"
-                    aria-label="LinkedIn"
-                  >
-                    <FaLinkedin className="text-xl" />
-                  </a>
-                  <a
-                    href="https://github.com/taha-digico"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 flex items-center justify-center rounded-lg bg-aws-dark text-white hover:bg-aws-orange transition-all duration-300 hover:scale-110"
-                    aria-label="GitHub"
-                  >
-                    <FaGithub className="text-xl" />
-                  </a>
-                </div>
+              <div className="inline-flex items-center gap-2 pt-2">
+                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                <span className="text-emerald-300 text-sm font-medium">Available for new opportunities</span>
               </div>
             </div>
 
-            {/* Right: CTA Card */}
-            <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <div className="card bg-gradient-to-br from-aws-orange/5 to-aws-blue/5 border-aws-orange">
-                <h3 className="text-2xl font-bold text-aws-dark mb-4">Ready to Build Something Amazing?</h3>
-                <p className="text-gray-600 mb-6">
-                  Whether you're looking to migrate to AWS, optimize your cloud infrastructure, or implement DevSecOps best practices, I'd love to hear about your project.
-                </p>
-
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <div className="w-2 h-2 bg-aws-orange rounded-full"></div>
-                    <span>AWS Cloud Architecture & Migration</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <div className="w-2 h-2 bg-aws-orange rounded-full"></div>
-                    <span>DevSecOps & CI/CD Implementation</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <div className="w-2 h-2 bg-aws-orange rounded-full"></div>
-                    <span>Infrastructure as Code (Terraform)</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-700">
-                    <div className="w-2 h-2 bg-aws-orange rounded-full"></div>
-                    <span>Cloud Security & Compliance</span>
-                  </li>
-                </ul>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a href="mailto:tahadekmakl4@gmail.com" className="btn-primary flex-1 justify-center">
-                    <FaEnvelope />
-                    Send Email
-                  </a>
-                  <a href="/Taha-Dekmak-CV.pdf" download className="btn-secondary flex-1 justify-center">
-                    Download CV
-                  </a>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 gap-4 mt-6">
-                <div className="card text-center">
-                  <p className="text-3xl font-bold text-aws-orange">24h</p>
-                  <p className="text-sm text-gray-600 mt-1">Response Time</p>
-                </div>
-                <div className="card text-center">
-                  <p className="text-3xl font-bold text-aws-blue">100%</p>
-                  <p className="text-sm text-gray-600 mt-1">Client Satisfaction</p>
-                </div>
+            <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-white/20 pt-8 lg:pt-0 lg:pl-10 space-y-6">
+              <a href={GMAIL_COMPOSE} target="_blank" rel="noopener noreferrer" className="block group">
+                <p className="text-white/50 text-xs font-mono uppercase tracking-wider mb-1">Email</p>
+                <p className="font-medium group-hover:text-accent transition-colors break-all">{EMAIL}</p>
+              </a>
+              <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="block group">
+                <p className="text-white/50 text-xs font-mono uppercase tracking-wider mb-1">LinkedIn</p>
+                <p className="font-medium group-hover:text-accent transition-colors">Taha Dekmak</p>
+              </a>
+              <div>
+                <p className="text-white/50 text-xs font-mono uppercase tracking-wider mb-1">Location</p>
+                <p className="font-medium">Beirut, Lebanon</p>
               </div>
             </div>
           </div>

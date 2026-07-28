@@ -1,135 +1,111 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaDownload, FaAws } from 'react-icons/fa';
-import { SiTerraform, SiKubernetes, SiDocker } from 'react-icons/si';
+import { FaEnvelope, FaDownload, FaArrowDown } from 'react-icons/fa';
+
+const stats = [
+  { value: '18', label: 'Certifications' },
+  { value: '5+', label: 'Years Experience' },
+  { value: '20+', label: 'Projects Delivered' },
+];
 
 const Hero = () => {
   return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden"
-    >
-      {/* Animated AWS Icons Background */}
-      <div className="absolute inset-0 overflow-hidden opacity-5">
-        <FaAws className="absolute top-20 left-10 text-9xl text-aws-orange animate-float" style={{ animationDelay: '0s' }} />
-        <SiTerraform className="absolute top-40 right-20 text-8xl text-aws-blue animate-float" style={{ animationDelay: '1s' }} />
-        <SiKubernetes className="absolute bottom-40 left-20 text-7xl text-aws-orange animate-float" style={{ animationDelay: '2s' }} />
-        <SiDocker className="absolute bottom-20 right-10 text-8xl text-aws-blue animate-float" style={{ animationDelay: '1.5s' }} />
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+      {/* Background motifs */}
+      <div
+        className="absolute inset-0 -z-10 opacity-[0.4]"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 1px 1px, rgba(10,10,10,0.07) 1px, transparent 0)',
+          backgroundSize: '28px 28px',
+          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%)',
+        }}
+      />
+      <div
+        className="absolute -top-32 -right-32 w-[36rem] h-[36rem] -z-10 rounded-full opacity-[0.12]"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle, #FF9900 0%, transparent 70%)' }}
+      />
 
-      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Left: Text Content */}
-        <div className="space-y-6 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-aws-orange/10 rounded-full border border-aws-orange/20">
-            <div className="w-2 h-2 bg-aws-orange rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-aws-orange">Available for opportunities</span>
-          </div>
+      <div className="container-max section-padding w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Text */}
+          <div className="lg:col-span-7 space-y-7 animate-fade-up">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-bg-primary/60 px-3 py-1.5 font-mono text-xs text-text-secondary">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Beirut, Lebanon · Available for opportunities
+            </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Hi, I'm{' '}
-            <span className="bg-gradient-to-r from-aws-orange to-aws-blue bg-clip-text text-transparent">
+            <h1 className="font-display text-[clamp(2.75rem,8vw,5.25rem)] font-bold leading-[0.98] tracking-tight text-text-primary">
               Taha Dekmak
-            </span>
-          </h1>
+            </h1>
 
-          <h2 className="text-2xl md:text-3xl text-gray-700 font-light">
-            AWS Solutions Architect{' '}
-            <span className="text-aws-orange font-bold">&</span>{' '}
-            DevSecOps Engineer
-          </h2>
+            <p className="text-2xl sm:text-3xl text-text-secondary font-light tracking-tight">
+              <span className="relative inline-block font-medium text-text-primary">
+                Senior Solutions Architect
+                <span className="absolute left-0 -bottom-1 h-3 w-full bg-accent/25 -z-10 rounded" />
+              </span>
+            </p>
 
-          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-            Certified AWS Solutions Architect designing secure, high-performance cloud architectures.
-            Expert in automating DevSecOps workflows using Terraform, CFN, and GitHub Actions to
-            deliver scalable infrastructure and robust cloud security.
-          </p>
+            <p className="text-lg text-text-secondary leading-relaxed max-w-xl">
+              Certified AWS Solutions Architect specializing in secure, cost-efficient, and
+              high-performing cloud architecture. I bring DevSecOps automation, Infrastructure as
+              Code, and operational excellence to teams that need to scale reliably, without
+              compromising security or overspending.
+            </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4 pt-4">
-            <a href="#contact" className="btn-primary">
-              <FaEnvelope />
-              Get In Touch
-            </a>
-            <a
-              href="/TahaDekmak-SSA.pdf"
-              download="TahaDekmak-SSA.pdf"
-              className="btn-secondary"
-            >
-              <FaDownload />
-              Download CV
-            </a>
+            <div className="flex flex-wrap gap-3 pt-1">
+              <a href="#contact" className="btn-primary">
+                <FaEnvelope className="w-4 h-4" />
+                Get In Touch
+              </a>
+              <a href="/TahaDekmak-SSA.pdf" download="TahaDekmak-SSA.pdf" className="btn-secondary">
+                <FaDownload className="w-4 h-4" />
+                Download CV
+              </a>
+            </div>
           </div>
 
-          {/* Social Links */}
-          <div className="flex gap-4 pt-4">
-            <a
-              href="https://www.linkedin.com/in/taha-dekmak/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-aws-dark text-white hover:bg-aws-orange transition-all duration-300 hover:scale-110"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="text-xl" />
-            </a>
-            <a
-              href="https://github.com/taha-digico"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-aws-dark text-white hover:bg-aws-orange transition-all duration-300 hover:scale-110"
-              aria-label="GitHub"
-            >
-              <FaGithub className="text-xl" />
-            </a>
-            <a
-              href="mailto:tahadekmakl4@gmail.com"
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-aws-dark text-white hover:bg-aws-orange transition-all duration-300 hover:scale-110"
-              aria-label="Email"
-            >
-              <FaEnvelope className="text-xl" />
-            </a>
-          </div>
-        </div>
+          {/* Image with framed treatment + floating badges */}
+          <div className="lg:col-span-5 relative animate-fade-up" style={{ animationDelay: '0.15s' }}>
+            <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 lg:ml-auto w-full">
+              {/* corner frame accents */}
+              <span className="absolute -top-2 -left-2 w-10 h-10 border-t-2 border-l-2 border-accent rounded-tl-lg" aria-hidden="true" />
+              <span className="absolute -bottom-2 -right-2 w-10 h-10 border-b-2 border-r-2 border-accent rounded-br-lg" aria-hidden="true" />
 
-        {/* Right: Profile Image */}
-        <div className="relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          <div className="relative w-full max-w-md mx-auto">
-            {/* Decorative elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-aws-orange to-aws-blue rounded-2xl transform rotate-6 opacity-20"></div>
-            <div className="absolute inset-0 bg-gradient-to-tl from-aws-blue to-aws-orange rounded-2xl transform -rotate-6 opacity-20"></div>
-            
-            {/* Main image container */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-              <img
-                src="/taha.jpeg"
-                alt="Taha Dekmak"
-                className="w-full h-auto object-cover"
-              />
-              
-              {/* AWS Badge Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 space-y-2">
-                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg flex items-center gap-2">
-                  <FaAws className="text-2xl text-aws-orange" />
-                  <div>
-                    <p className="text-xs font-bold text-aws-dark">AWStronaut (12x AWS)</p>
-                    <p className="text-[10px] text-gray-600">Golden Jacket Holder</p>
-                  </div>
-                </div>
-                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg flex items-center gap-2">
-                  <SiKubernetes className="text-2xl text-blue-600" />
-                  <div>
-                    <p className="text-xs font-bold text-aws-dark">Kubestronaut (5x K8s)</p>
-                    <p className="text-[10px] text-gray-600">CNCF Certified</p>
-                  </div>
-                </div>
+              <div className="relative h-full w-full overflow-hidden rounded-lg border border-border bg-bg-tertiary">
+                <img
+                  src="/taha.jpeg"
+                  alt="Taha Dekmak - AWS Solutions Architect"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-aws-orange rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-aws-orange rounded-full mt-2 animate-pulse"></div>
+        {/* Stats */}
+        <div className="mt-14 lg:mt-24 pt-8 border-t border-border flex flex-wrap items-center gap-x-8 sm:gap-x-12 gap-y-6">
+          {stats.map((s) => (
+            <div key={s.label} className="flex items-baseline gap-2 sm:gap-3">
+              <p className="font-display text-3xl sm:text-4xl font-bold text-text-primary tabular-nums">
+                {s.value}
+              </p>
+              <p className="text-text-muted text-xs sm:text-sm font-mono max-w-[6rem] sm:max-w-[7rem] leading-tight">
+                {s.label}
+              </p>
+            </div>
+          ))}
+          <a
+            href="#about"
+            className="ml-auto hidden sm:inline-flex items-center gap-2 text-text-muted hover:text-accent transition-colors text-xs font-mono uppercase tracking-widest"
+          >
+            Scroll <FaArrowDown className="w-3.5 h-3.5 animate-bounce" />
+          </a>
         </div>
       </div>
     </section>
