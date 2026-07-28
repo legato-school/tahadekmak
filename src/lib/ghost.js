@@ -55,6 +55,41 @@ export async function getPostBySlug(slug) {
   return data.posts?.[0] || null;
 }
 
+// Subscribe a member (free newsletter signup). Ghost emails a magic link to confirm.
+// Requires Ghost to have email (Mailgun/SMTP) configured for the link to actually send.
+export async function subscribeMember(email, name = '') {
+  if (!email) throw new Error('Email is required');
+
+  // 1. Fetch the integrity token (anti-spam, required by Ghost 5.87+)
+  const tokenRes = await fetch(`${API_URL}/members/api/integrity-token/`, { method: 'GET' });
+  const integrityToken = (await tokenRes.text()).trim();
+
+  // 2. Request the magic link / create the free member
+  const res = await fetch(`${API_URL}/members/api/send-magic-link/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email,
+      name,
+      emailType: 'subscribe',
+      labels: [],
+      integrityToken,
+    }),
+  });
+
+  if (!res.ok) {
+    let msg = 'Subscription failed. Please try again.';
+    try {
+      const body = await res.json();
+      msg = body?.errors?.[0]?.message || msg;
+    } catch (_) {
+      /* ignore */
+    }
+    throw new Error(msg);
+  }
+  return true;
+}
+
 export function formatDate(iso) {
   if (!iso) return '';
   try {

@@ -2,6 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { getPostBySlug, formatDate, isGhostConfigured } from '../lib/ghost';
+import Subscribe from '../components/Subscribe';
+
+// Ghost post content contains Portal subscribe links (#/portal/...) that only
+// work on the Ghost frontend. On our headless site, redirect those clicks to
+// our own subscribe form instead.
+function handleContentClick(e) {
+  const link = e.target.closest('a');
+  if (!link) return;
+  const href = link.getAttribute('href') || '';
+  if (href.includes('/portal') || href.includes('#/portal')) {
+    e.preventDefault();
+    const box = document.getElementById('subscribe');
+    if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const input = document.getElementById('subscribe-email');
+    if (input) setTimeout(() => input.focus(), 400);
+  }
+}
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -123,8 +140,13 @@ const BlogPost = () => {
 
             <div
               className="prose-blog"
+              onClick={handleContentClick}
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
+
+            <div className="mt-16">
+              <Subscribe />
+            </div>
           </div>
         )}
       </div>

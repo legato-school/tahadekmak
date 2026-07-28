@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 import { getPosts, formatDate, isGhostConfigured } from '../lib/ghost';
+import Subscribe from '../components/Subscribe';
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
@@ -44,6 +45,10 @@ const BlogList = () => {
             platforms in production.
           </p>
         </header>
+
+        <div className="mb-12">
+          <Subscribe />
+        </div>
 
         {status === 'loading' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
