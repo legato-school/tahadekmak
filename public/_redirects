@@ -1,0 +1,6 @@
+# Redirect /blogs to Ghost CMS instance
+/blogs/* http://52.49.181.64/blogs/:splat 200
+/blogs http://52.49.181.64/blogs 200
+
+# SPA fallback
+/*    /index.html   200
