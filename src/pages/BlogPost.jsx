@@ -1,52 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaArrowLeft, FaTimes } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 import { getPostBySlug, formatDate, isGhostConfigured } from '../lib/ghost';
 import Subscribe from '../components/Subscribe';
 
+// Return the original, full-resolution Ghost image URL (strip responsive size).
+function fullResImage(img) {
+  const src = img.getAttribute('src') || img.src || '';
+  return src.replace(/\/content\/images\/size\/[^/]+\//, '/content/images/');
+}
+
 const BlogPost = () => {
   const { slug } = useParams();
+  const contentRef = useRef(null);
   const [post, setPost] = useState(null);
   const [status, setStatus] = useState('loading'); // loading | ready | notfound | error | unconfigured
   const [error, setError] = useState('');
-  const [zoomSrc, setZoomSrc] = useState(null); // lightbox image
 
-  // Handle clicks inside the rendered Ghost HTML:
-  // - Portal subscribe links (#/portal/...) -> scroll to our subscribe form
-  // - Images -> open in a zoom lightbox
+  // Intercept Ghost Portal subscribe links (#/portal/...) -> our subscribe form.
   const handleContentClick = (e) => {
     const link = e.target.closest('a');
-    if (link) {
-      const href = link.getAttribute('href') || '';
-      if (href.includes('/portal') || href.includes('#/portal')) {
-        e.preventDefault();
-        const box = document.getElementById('subscribe');
-        if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        const input = document.getElementById('subscribe-email');
-        if (input) setTimeout(() => input.focus(), 400);
-        return;
-      }
-    }
-    const img = e.target.closest('img');
-    if (img && img.src) {
+    if (!link) return;
+    const href = link.getAttribute('href') || '';
+    if (href.includes('/portal') || href.includes('#/portal')) {
       e.preventDefault();
-      setZoomSrc(img.currentSrc || img.src);
+      const box = document.getElementById('subscribe');
+      if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const input = document.getElementById('subscribe-email');
+      if (input) setTimeout(() => input.focus(), 400);
     }
   };
-
-  // Close the lightbox on Escape
-  useEffect(() => {
-    if (!zoomSrc) return;
-    const onKey = (e) => {
-      if (e.key === 'Escape') setZoomSrc(null);
-    };
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [zoomSrc]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,6 +62,39 @@ const BlogPost = () => {
       active = false;
     };
   }, [slug]);
+
+  // PhotoSwipe: wrap each content image in a gallery link and init the lightbox.
+  useEffect(() => {
+    if (status !== 'ready' || !contentRef.current) return;
+    const root = contentRef.current;
+
+    root.querySelectorAll('img').forEach((img) => {
+      if (img.dataset.pswpReady) return;
+      const link = document.createElement('a');
+      link.href = fullResImage(img);
+      link.className = 'pswp-item';
+      link.target = '_blank';
+      link.rel = 'noreferrer';
+      link.setAttribute('data-pswp-width', img.getAttribute('width') || img.naturalWidth || 1600);
+      link.setAttribute('data-pswp-height', img.getAttribute('height') || img.naturalHeight || 1200);
+      img.parentNode.insertBefore(link, img);
+      link.appendChild(img);
+      img.dataset.pswpReady = '1';
+    });
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: root,
+      children: 'a.pswp-item',
+      bgOpacity: 0.92,
+      initialZoomLevel: 'fit',   // open showing the whole diagram
+      secondaryZoomLevel: 2.5,   // click / double-tap jumps to 2.5x
+      maxZoomLevel: 6,           // wheel / pinch can go up to 6x for fine detail
+      wheelToZoom: true,         // plain scroll wheel zooms (no ctrl needed)
+      pswpModule: () => import('photoswipe'),
+    });
+    lightbox.init();
+    return () => lightbox.destroy();
+  }, [status, post]);
 
   return (
     <article className="section-band pt-32">
@@ -153,6 +171,7 @@ const BlogPost = () => {
             </header>
 
             <div
+              ref={contentRef}
               className="prose-blog"
               onClick={handleContentClick}
               dangerouslySetInnerHTML={{ __html: post.html }}
@@ -164,30 +183,6 @@ const BlogPost = () => {
           </div>
         )}
       </div>
-
-      {/* Image zoom lightbox */}
-      {zoomSrc && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 cursor-zoom-out animate-fade-up"
-          onClick={() => setZoomSrc(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <button
-            className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
-            aria-label="Close"
-            onClick={() => setZoomSrc(null)}
-          >
-            <FaTimes className="w-4 h-4" />
-          </button>
-          <img
-            src={zoomSrc}
-            alt=""
-            className="max-h-[90vh] max-w-[92vw] rounded-lg shadow-2xl object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
     </article>
   );
 };

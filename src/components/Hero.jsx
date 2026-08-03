@@ -2,7 +2,7 @@ import React from 'react';
 import { FaEnvelope, FaDownload, FaArrowDown } from 'react-icons/fa';
 
 const stats = [
-  { value: '18', label: 'Certifications' },
+  { value: '19', label: 'Certifications' },
   { value: '5+', label: 'Years Experience' },
   { value: '20+', label: 'Projects Delivered' },
 ];
