@@ -1,30 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaTimes } from 'react-icons/fa';
 import { getPostBySlug, formatDate, isGhostConfigured } from '../lib/ghost';
 import Subscribe from '../components/Subscribe';
-
-// Ghost post content contains Portal subscribe links (#/portal/...) that only
-// work on the Ghost frontend. On our headless site, redirect those clicks to
-// our own subscribe form instead.
-function handleContentClick(e) {
-  const link = e.target.closest('a');
-  if (!link) return;
-  const href = link.getAttribute('href') || '';
-  if (href.includes('/portal') || href.includes('#/portal')) {
-    e.preventDefault();
-    const box = document.getElementById('subscribe');
-    if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const input = document.getElementById('subscribe-email');
-    if (input) setTimeout(() => input.focus(), 400);
-  }
-}
 
 const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [status, setStatus] = useState('loading'); // loading | ready | notfound | error | unconfigured
   const [error, setError] = useState('');
+  const [zoomSrc, setZoomSrc] = useState(null); // lightbox image
+
+  // Handle clicks inside the rendered Ghost HTML:
+  // - Portal subscribe links (#/portal/...) -> scroll to our subscribe form
+  // - Images -> open in a zoom lightbox
+  const handleContentClick = (e) => {
+    const link = e.target.closest('a');
+    if (link) {
+      const href = link.getAttribute('href') || '';
+      if (href.includes('/portal') || href.includes('#/portal')) {
+        e.preventDefault();
+        const box = document.getElementById('subscribe');
+        if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const input = document.getElementById('subscribe-email');
+        if (input) setTimeout(() => input.focus(), 400);
+        return;
+      }
+    }
+    const img = e.target.closest('img');
+    if (img && img.src) {
+      e.preventDefault();
+      setZoomSrc(img.currentSrc || img.src);
+    }
+  };
+
+  // Close the lightbox on Escape
+  useEffect(() => {
+    if (!zoomSrc) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setZoomSrc(null);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [zoomSrc]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -130,14 +152,6 @@ const BlogPost = () => {
               )}
             </header>
 
-            {post.feature_image && (
-              <img
-                src={post.feature_image}
-                alt={post.feature_image_alt || post.title}
-                className="w-full rounded-lg border border-border mb-10"
-              />
-            )}
-
             <div
               className="prose-blog"
               onClick={handleContentClick}
@@ -150,6 +164,30 @@ const BlogPost = () => {
           </div>
         )}
       </div>
+
+      {/* Image zoom lightbox */}
+      {zoomSrc && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 cursor-zoom-out animate-fade-up"
+          onClick={() => setZoomSrc(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+            aria-label="Close"
+            onClick={() => setZoomSrc(null)}
+          >
+            <FaTimes className="w-4 h-4" />
+          </button>
+          <img
+            src={zoomSrc}
+            alt=""
+            className="max-h-[90vh] max-w-[92vw] rounded-lg shadow-2xl object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </article>
   );
 };
