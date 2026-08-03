@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaEnvelope, FaDownload, FaArrowDown } from 'react-icons/fa';
+import { FaEnvelope, FaArrowDown } from 'react-icons/fa';
 
 const stats = [
   { value: '19', label: 'Certifications' },
@@ -32,14 +32,6 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Text */}
           <div className="lg:col-span-7 space-y-7 animate-fade-up">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-bg-primary/60 px-3 py-1.5 font-mono text-xs text-text-secondary">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              Beirut, Lebanon · Available for opportunities
-            </div>
-
             <h1 className="font-display text-[clamp(2.75rem,8vw,5.25rem)] font-bold leading-[0.98] tracking-tight text-text-primary">
               Taha Dekmak
             </h1>
@@ -63,10 +55,7 @@ const Hero = () => {
                 <FaEnvelope className="w-4 h-4" />
                 Get In Touch
               </a>
-              <a href="/TahaDekmak-SSA.pdf" download="TahaDekmak-SSA.pdf" className="btn-secondary">
-                <FaDownload className="w-4 h-4" />
-                Download CV
-              </a>
+              {/* Download CV button temporarily removed */}
             </div>
           </div>
 
