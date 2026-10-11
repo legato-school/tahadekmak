@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaEnvelope, FaArrowDown } from 'react-icons/fa';
+import { FaEnvelope, FaDownload, FaArrowDown } from 'react-icons/fa';
 
 const stats = [
-  { value: '19', label: 'Certifications' },
+  { value: '20', label: 'Certifications' },
   { value: '5+', label: 'Years Experience' },
   { value: '20+', label: 'Projects Delivered' },
 ];
@@ -44,10 +44,10 @@ const Hero = () => {
             </p>
 
             <p className="text-lg text-text-secondary leading-relaxed max-w-xl">
-              Certified AWS Solutions Architect specializing in secure, cost-efficient, and
-              high-performing cloud architecture. I bring DevSecOps automation, Infrastructure as
-              Code, and operational excellence to teams that need to scale reliably, without
-              compromising security or overspending.
+              Senior Solutions Architect designing secure, highly resilient cloud platforms and
+              leading cloud migrations and generative AI delivery. I automate DevSecOps workflows
+              with Terraform and GitHub Actions to deliver scalable infrastructure, strong
+              security, and operational excellence.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-1">
@@ -55,7 +55,10 @@ const Hero = () => {
                 <FaEnvelope className="w-4 h-4" />
                 Get In Touch
               </a>
-              {/* Download CV button temporarily removed */}
+              <a href="/TahaDekmakSSA2026.pdf" download="TahaDekmakSSA2026.pdf" className="btn-secondary">
+                <FaDownload className="w-4 h-4" />
+                Download CV
+              </a>
             </div>
           </div>
 

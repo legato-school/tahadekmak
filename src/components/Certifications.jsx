@@ -14,6 +14,7 @@ const tierColor = {
   Kubernetes: 'text-[#326CE5]',
   HashiCorp: 'text-[#7B42BC]',
   Anthropic: 'text-[#D97757]',
+  'AI Business': 'text-amber-700',
 };
 
 const credentials = [
@@ -115,9 +116,15 @@ const credentials = [
   },
   // Anthropic
   {
-    tier: 'Anthropic', name: 'Claude Certified Architect', code: 'Anthropic', date: '2026',
+    tier: 'Anthropic', name: 'Claude Certified Architect - Professional', code: 'Anthropic', date: '2026',
     url: `${CREDLY}/006f4b38-7243-47ce-8452-a0059dbda948`,
     img: `${IMG}/7583afbc-4aab-4c7d-8af4-d9af72786ab3/linkedin_thumb_blob`,
+  },
+  // AWS AI Business
+  {
+    tier: 'AI Business', name: 'AI Business Strategist (Early Adopter)', code: 'AWS', date: '2026',
+    url: `${CREDLY}/0e166b7a-c5e1-46cc-80d7-827bd4d64297`,
+    img: `${IMG}/b7716dcd-7fd1-4cb2-bcc8-23685f1bcdd8/linkedin_thumb_blob`,
   },
 ];
 
@@ -136,7 +143,7 @@ const Certifications = () => {
           <h2 className="section-title">Certified, end to end</h2>
           <p className="section-lead">
             Validated depth across the full AWS stack and the cloud-native ecosystem, spanning
-            19 active certifications. Every badge links to its Credly verification.
+            20 active certifications. Every badge links to its Credly verification.
           </p>
         </header>
 
@@ -151,9 +158,9 @@ const Certifications = () => {
                 <FaTrophy className="w-3.5 h-3.5 text-accent" />
                 <p className="text-xs font-mono uppercase tracking-wider text-accent">AWStronaut</p>
               </div>
-              <h3 className="text-lg font-bold text-text-primary mt-1">AWS Golden Jacket · 12x Certified</h3>
+              <h3 className="text-lg font-bold text-text-primary mt-1">AWS Golden Jacket · 13x Certified</h3>
               <p className="text-text-secondary text-sm mt-1 leading-relaxed">
-                Holder of every active AWS certification across Foundational, Associate, Professional and Specialty.
+                Holder of every active AWS certification across Foundational, Associate, Professional, Specialty, and AI Business.
               </p>
             </div>
           </div>

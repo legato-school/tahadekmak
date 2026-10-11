@@ -34,13 +34,13 @@ const About = () => {
               </p>
               <p>
                 Over the past few years I've grown from full-stack development and production support
-                into DevSecOps and cloud architecture. Today I lead a cross-functional team of DevOps
-                and AI engineers at Digico Solutions, delivering end-to-end AWS solutions for startups
-                and SMBs across the region.
+                into DevSecOps and cloud architecture. Today I lead a cross-functional team of 8 DevOps
+                and AI engineers at Digico Solutions, leading cloud migrations and generative AI delivery
+                for startups and SMBs across the region.
               </p>
               <p>
                 What sets me apart is a relentless curiosity paired with breadth: I hold the full{' '}
-                <span className="text-accent font-medium">AWS Golden Jacket (12x certified)</span> and am a{' '}
+                <span className="text-accent font-medium">AWS Golden Jacket (13x certified)</span> and am a{' '}
                 <span className="text-accent font-medium">Kubestronaut (5x Kubernetes certified)</span>, proof
                 of a commitment to going deep across cloud and cloud-native ecosystems.
               </p>

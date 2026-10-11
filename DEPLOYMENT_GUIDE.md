@@ -22,7 +22,7 @@ Complete step-by-step guide to deploy your portfolio to AWS Amplify and configur
    - This will be used for both Hero and About sections
 
 2. **CV/Resume**:
-   - Add your CV as: `/public/TahaDekmak-SSA.pdf`
+   - Add your CV as: `/public/TahaDekmakSSA2026.pdf`
 
 3. **Social Share Image (Optional)**:
    - Copy social image to: `/public/og-image.jpg` (1200x630px for social sharing)
@@ -37,7 +37,7 @@ cd /Users/tahadekmak/Documents/logixdev/7jezle/tahadekmak/public
 
 # Copy your images here
 cp ~/path-to-your-photo.jpeg taha.jpeg
-cp ~/path-to-your-cv.pdf TahaDekmak-SSA.pdf
+cp ~/path-to-your-cv.pdf TahaDekmakSSA2026.pdf
 cp ~/path-to-og-image.jpg og-image.jpg  # optional
 ```
 
@@ -307,7 +307,7 @@ colors: {
 1. Verify images exist in `/public` folder
 2. Check filenames match exactly:
    - `taha.jpeg` (profile photo)
-   - `TahaDekmak-SSA.pdf` (CV)
+   - `TahaDekmakSSA2026.pdf` (CV)
    - `og-image.jpg` (optional social share image)
 3. Push to GitHub and redeploy
 
